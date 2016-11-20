@@ -15,9 +15,11 @@
             event.preventDefault(); // prevent form from submitting via HTML's form protocols
             $("#input").val(parseFloat($("#input").val()).toFixed(2)); // validate input to ensure 2 decimal places are sent to the server
             $.post("http://localhost:8080/push", $("#input").serialize(), "text"); // POST input to server
-            $.get("http://localhost:8080/pull", function(data){ // GET data from server and display on page
-                $("#output").text(data);
-            }, "text");
+            setTimeout(function(){
+                $.get("http://localhost:8080/pull", function(data){ // GET data from server and display on page
+                    $("#output").text(data);
+                }, "text");
+            }, 300)
         });
     });
     </script>
@@ -55,6 +57,8 @@
     body{
         font: 400 15px Lato, sans-serif;
         line-height: 1.8;
+        color: white;
+        background-color: #383838;
     }
 
     h3{

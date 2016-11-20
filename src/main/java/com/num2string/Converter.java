@@ -39,7 +39,7 @@ public class Converter {
 
     // function to convert numbers of 2 digits to words
     private String ConvertTens(int decimal){
-        if (decimal == 0){ // numbers between 0 and 19 can be directly
+        if (decimal == 0){ // numbers between 0 and 19 can be directly mapped
             return "Zero";
         } else if (decimal < 10){
             return numMap.getOnesString(decimal % 10);
@@ -70,18 +70,31 @@ public class Converter {
             // this iteratively calculates the values and suffixes of each order of magnitude with minimal code
             String hundreds = numMap.getOnesString(base/100);
             String trailingResult = ConvertTens(base % 100);
-            result = hundreds + " Hundred And " + trailingResult;
+            if (trailingResult == "Zero"){
+                result = hundreds + " Hundred ";
+            } else {
+                result = hundreds + " Hundred And " + trailingResult;
+            }
         } else if (base < 1000000){
             String thousands = ConvertBase(base/1000);
             String trailingResult = ConvertBase(base % 1000);
+            if (trailingResult == "Zero"){
+                trailingResult = "";
+            }
             result = thousands + " Thousand " + trailingResult;
         } else if (base < 1000000000){
             String millions = ConvertBase(base/1000000);
             String trailingResult = ConvertBase(base % 1000000);
+            if (trailingResult == "Zero"){
+                trailingResult = "";
+            }
             result = millions + " Million " + trailingResult;
         } else if (base < 2147483647){
             String billions = ConvertBase(base/1000000000);
             String trailingResult = ConvertBase(base % 1000000000);
+            if (trailingResult == "Zero"){
+                trailingResult = "";
+            }
             result = billions + " Billion " + trailingResult;
         }
         return result;
