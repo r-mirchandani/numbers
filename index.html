@@ -12,10 +12,10 @@
     <script>
     $(document).ready(function(){
         $("#submission").submit(function(){
-            event.preventDefault();
-            $("#input").val(parseFloat($("#input").val()).toFixed(2));
-            $.post("http://localhost:8080/push", $("#input").serialize(), "text");
-            $.get("http://localhost:8080/pull", function(data){
+            event.preventDefault(); // prevent form from submitting via HTML's form protocols
+            $("#input").val(parseFloat($("#input").val()).toFixed(2)); // validate input to ensure 2 decimal places are sent to the server
+            $.post("http://localhost:8080/push", $("#input").serialize(), "text"); // POST input to server
+            $.get("http://localhost:8080/pull", function(data){ // GET data from server and display on page
                 $("#output").text(data);
             }, "text");
         });
@@ -23,7 +23,7 @@
     </script>
 </head>
 
-<style>
+<style> <!-- CSS -->
     .bg-1{
         background-color: #383838;
         color: white;
@@ -62,14 +62,14 @@
     }
 </style>
 
-<body class="bg-1">
+<body class="bg-1"> <!-- Bootstrapped HTML -->
     <div class="jumbotron bg-2">
         <h1 id="header" class="text-center" class="well">Numbers to Words Converter</h1>
     </div>
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-8 body">
-            <form class="text-center" id="submission">
+            <form class="text-center" id="submission"> <!-- Form to validate and store user input -->
                 <h3>Please enter a positive number with up to two decimal places!</h3>
                 <input id="input" class="input" type="number" step="0.01" min="0.00" max="2147483646.99" size="16" name="input" required="required" placeholder="1234567.89"/>
                 <input id="submit" type="submit" value="Convert!" class="btn btn-primary"/>

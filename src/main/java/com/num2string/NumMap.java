@@ -3,12 +3,12 @@ import java.util.HashMap;
 
 public class NumMap {
 
+    // Initialize hashmaps
     HashMap<Integer, String>  onesMap= new HashMap<Integer, String>();
     HashMap<Integer, String>  tensMap = new HashMap<Integer, String>();
     HashMap<Integer, String>  teensMap = new HashMap<Integer, String>();
-    HashMap<Integer, String>  nameMap = new HashMap<Integer, String>();
 
-    public NumMap() {
+    public NumMap() { // Populate hashmaps
         onesMap.put(0, "");
         onesMap.put(1, "One");
         onesMap.put(2, "Two");
@@ -42,6 +42,7 @@ public class NumMap {
         teensMap.put(19, "Nineteen");
     }
 
+    // Getters (setters not required)
     public String getOnesString(int digit){
         return onesMap.get(digit);
     }
@@ -52,9 +53,5 @@ public class NumMap {
 
     public String getTeensString(int digit){
         return teensMap.get(digit);
-    }
-
-    public String getNameString(int digit){
-        return nameMap.get(digit);
     }
 }
