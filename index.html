@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Numbers to Words Converter</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $("#submission").submit(function(){
+            event.preventDefault();
+            $("#input").val(parseFloat($("#input").val()).toFixed(2));
+            $.post("http://localhost:8080/push", $("#input").serialize(), "text");
+            $.get("http://localhost:8080/pull", function(data){
+                $("#output").text(data);
+            }, "text");
+        });
+    });
+    </script>
+</head>
+
+<style>
+    .bg-1{
+        background-color: #383838;
+        color: white;
+    }
+
+    .bg-2{
+        background-color: #383838;
+    }
+
+    #header{
+        color: white;
+        height: 10px;
+    }
+
+    .footer{
+        position: fixed;
+        bottom: 0px;
+        height: auto;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        background-color: #dc531f;
+    }
+
+    #input{
+        background-color: white;
+        color: black;
+    }
+
+    body{
+        font: 400 15px Lato, sans-serif;
+        line-height: 1.8;
+    }
+
+    h3{
+        height: 40px;
+    }
+</style>
+
+<body class="bg-1">
+    <div class="jumbotron bg-2">
+        <h1 id="header" class="text-center" class="well">Numbers to Words Converter</h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 body">
+            <form class="text-center" id="submission">
+                <h3>Please enter a positive number with up to two decimal places!</h3>
+                <input id="input" class="input" type="number" step="0.01" min="0.00" max="2147483646.99" size="16" name="input" required="required" placeholder="1234567.89"/>
+                <input id="submit" type="submit" value="Convert!" class="btn btn-primary"/>
+            </form>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="jumbotron bg-2">
+        <p id="output" class="text-center"></p>
+    </div>
+    <footer class="container-fluid text-center bg-2 footer col-sm-12">
+        <h3>Developed by Rohan Mirchandani</h3>
+    </footer>
+</body>
+
+</html>
