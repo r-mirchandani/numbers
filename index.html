@@ -16,7 +16,7 @@
             $("#input").val(parseFloat($("#input").val()).toFixed(2)); // validate input to ensure 2 decimal places are sent to the server
             $.post("http://localhost:8080/push", $("#input").serialize(), "text"); // POST input to server
             setTimeout(function(){
-                $.get("http://localhost:8080/pull", function(data){ // GET data from server and display on page
+                $.get("http://localhost:8080/pull", function(data){ // GET data from server and display on page after a slight delay to ensure POST has completed
                     $("#output").text(data);
                 }, "text");
             }, 300)
